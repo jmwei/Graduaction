@@ -4,10 +4,20 @@ angular
   .config(config);
 
   function config($stateProvider,$urlRouterProvider) {
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/index');
     $stateProvider
       .state('sys',{
-        url:'/',
-        templateUrl: 'sys/views/login.html'
+        url:'/index',
+        views: {
+          '': {
+            templateUrl: 'sys/views/index.html'
+          },
+          'topbar@sys': {
+            templateUrl: 'sys/views/topbar.html'
+          },
+          'main@sys': {
+            templateUrl: 'sys/views/home.html'
+          }
+        }
       })
   }

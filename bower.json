@@ -18,6 +18,8 @@
   "dependencies": {
     "angular": "~1.5.3",
     "angular-ui-router": "~0.2.18",
-    "bootstrap": "~3.3.6"
+    "bootstrap": "~3.3.6",
+    "font-awesome": "fontawesome#~4.5.0",
+    "less": "~2.6.1"
   }
 }
