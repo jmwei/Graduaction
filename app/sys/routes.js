@@ -20,4 +20,14 @@ angular
           }
         }
       })
+      .state('sys.login',{
+        url:'/login',
+        views: {
+          'main@sys': {
+            templateUrl: 'sys/views/login.html',
+            controller: 'loginCtrl',
+            controllerAs: 'vm'
+          }
+        }
+      })
   }
