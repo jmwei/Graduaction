@@ -20,12 +20,36 @@ angular
           }
         }
       })
-      .state('sys.login',{
+      .state('sys.main',{
+        url:'/main',
+        views: {
+          'main@sys': {
+            templateUrl: 'sys/views/main.html',
+          }
+        }
+      })
+      .state('sys.main.login',{
+        url:'/login',
+        templateUrl: 'sys/views/login.html',
+        controller: 'loginCtrl',
+        controllerAs: 'vm'
+      })
+      /*.state('sys.main.login',{
         url:'/login',
         views: {
           'main@sys': {
             templateUrl: 'sys/views/login.html',
             controller: 'loginCtrl',
+            controllerAs: 'vm'
+          }
+        }
+      })*/
+      .state('sys.register',{
+        url:'/register',
+        views: {
+          'main@sys': {
+            templateUrl: 'sys/views/register.html',
+            controller: 'registerCtrl',
             controllerAs: 'vm'
           }
         }
