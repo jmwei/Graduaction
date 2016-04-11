@@ -2,5 +2,7 @@
 angular
   .module('sysApp', [
     'ui.router',
-    'sys.routes'
+    'sys.routes',
+    'smart-table',
+    'ngTable'
   ])

@@ -34,6 +34,12 @@ angular
         controller: 'loginCtrl',
         controllerAs: 'vm'
       })
+      .state('sys.main.information',{
+        url:'/information',
+        templateUrl: 'sys/views/information.html',
+        controller: 'informationCtrl',
+        controllerAs: 'vm'
+      })
       /*.state('sys.main.login',{
         url:'/login',
         views: {

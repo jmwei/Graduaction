@@ -1,0 +1,23 @@
+<table st-table="vm.info" class="table table-striped">
+  <thead>
+    <tr>
+      <th st-sort="Name">Name</th>
+      <th st-sort="No">No</th>
+      <th st-sort="Remark">Remark</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="t in vm.info">
+      <td>{{$index}}{{t.attributes.name}}</td>
+      <td>{{t.attributes.no}}</td>
+      <td>{{t.attributes.remark}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="5" class="text-center">
+        <div st-pagination="" st-items-by-page="vm.itemsByPage" st-displayed-pages="3"></div>
+      </td>
+    </tr>
+  </tfoot>
+</table>
