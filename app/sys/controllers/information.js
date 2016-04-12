@@ -5,11 +5,10 @@ angular
 function informationCtrl ($scope){
   var vm = this;
   vm.itemsByPage = 5;
-  
-  function getInfo (){
-    Bmob.initialize('7e492cbe197a97cecf3c0ad72120dd04', 'a7d52f0f857157f328fc36600b5b0034');
 
-    var Info = Bmob.Object.extend('information');
+   Bmob.initialize('7e492cbe197a97cecf3c0ad72120dd04', 'a7d52f0f857157f328fc36600b5b0034');
+
+    /* var Info = Bmob.Object.extend('information');
     var query = new Bmob.Query(Info);
     query.select('name','no','remark');
     //query.limit(10);
@@ -20,12 +19,28 @@ function informationCtrl ($scope){
         info.push(t.attributes);
       });
       vm.infos = info;
-    })
-  }
-  getInfo();
+    })*/
 
 
-  var
+    var viewModel = {};
+    viewModel.data = ko.observableArray();
+    viewModel.initData = function() {
+        var Chat = Bmob.Object.extend('information');
+        var chat = new Bmob.Query(Chat);
+        chat.select('name','no','remark');
+        chat.find().then(function(results){
+            viewModel.data(results);
+        });
+    }();
+    ko.applyBindings(viewModel);
+
+    var test = viewModel;
+
+  console.log(test)
+
+
+
+/*  var
       nameList = ['Pierre', 'Pol', 'Jacques', 'Robert', 'Elisa'],
       familyName = ['Dupont', 'Germain', 'Delcourt', 'bjip', 'Menez'];
 
@@ -53,6 +68,6 @@ function informationCtrl ($scope){
       $scope.rowCollection.push(createRandomItem());
   }
 
-  console.log('111',$scope.rowCollection)
+  console.log('111',$scope.rowCollection)*/
 
 }
