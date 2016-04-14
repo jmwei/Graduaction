@@ -6,23 +6,23 @@ function informationCtrl ($scope){
   var vm = this;
   vm.itemsByPage = 5;
 
-   Bmob.initialize('7e492cbe197a97cecf3c0ad72120dd04', 'a7d52f0f857157f328fc36600b5b0034');
+  Bmob.initialize('7e492cbe197a97cecf3c0ad72120dd04', 'a7d52f0f857157f328fc36600b5b0034');
 
-    /* var Info = Bmob.Object.extend('information');
+    var Info = Bmob.Object.extend('information');
     var query = new Bmob.Query(Info);
     query.select('name','no','remark');
     //query.limit(10);
+    vm.info2 = [];
     query.find().then(function (results){
       vm.info = results;
-      var info = [];
       _.forEach(vm.info,function (t){
-        info.push(t.attributes);
+        vm.info2.push(t.attributes);
       });
-      vm.infos = info;
-    })*/
+      $scope.$apply();
+    })
 
 
-    var viewModel = {};
+    /*var viewModel = {};
     viewModel.data = ko.observableArray();
     viewModel.initData = function() {
         var Chat = Bmob.Object.extend('information');
@@ -36,7 +36,7 @@ function informationCtrl ($scope){
 
     var test = viewModel;
 
-  console.log(test)
+  console.log(test)*/
 
 
 
