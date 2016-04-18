@@ -2,7 +2,7 @@ angular
   .module('sysApp')
   .controller('loginCtrl',loginCtrl);
 
-function loginCtrl($scope){
+function loginCtrl($scope,$state){
   var vm = this;
   vm.user = {};
   vm.login = login;
@@ -25,7 +25,8 @@ function loginCtrl($scope){
   		//登录时验证用户名、密码
   		_.find(user, function (t){
 				if(userName === t.userName && password === t.password) {
-  				console.log('111',111);
+          alert(111)
+  				$state.go('sys')
   			} 
   		})
   		

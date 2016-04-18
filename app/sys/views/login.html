@@ -1,32 +1,62 @@
-<div class="container login">
-  <form class="form-horizontal">
-    <div class="form-group">
-      <label class="control-label col-sm-3">用户名</label>
-      <div class="col-sm-8">
-        <input type="text" name="userName"
-          class="form-control"
-          ng-model="vm.user.userName">
-      </div>
+<div class="container userLogin">
+  <!--logo部分-->
+  <div>
+    <span class="logo-text">XX管理系统平台</span>
+  </div>
+  <!--登陆部分-->
+  <div class="content">
+    <div class="news col-xs-7">
+      <!-- <div id="box">
+        <ul class="pic">
+          <li>
+            <a href="javascript:void(0)"><img src="resources/images/news-pic.png" text="罗盘协议酒店上线"></a>
+          </li>
+          <li>
+            <a href="javascript:void(0)"><img src="resources/images/news-pic1.png" text="机场班车免费搭乘"></a>
+          </li>
+        </ul>
+      </div> -->
     </div>
-
-    <div class="form-group">
-      <label class="control-label col-sm-3">密码</label>
-      <div class="col-sm-8">
-        <input type="password" name="userPwd"
-          class="form-control"
-          ng-model="vm.user.userPwd">
-      </div>
+    <div class="login col-xs-4">
+      <form role="form">
+        <div><span class="login-text"><b>账号登录</b></span></div>
+        <div class="input-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
+          </span>
+          <input type="text" name="username" 
+            class="form-control username" 
+            ng-model="vm.user.userName"
+            placeholder="请输入用户名">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-lock"></span>
+          </span>
+          <input type="password" name="password" 
+            class="form-control password"
+            ng-model="vm.user.userPwd"
+            placeholder="请输入密码">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox"><span class="login-remember">30天内自动登录</span>
+          <span class="pull-right forget-pwd"><a href="javascript:;">忘记密码？</a></span>
+        </div>    
+        <div class="text-center">
+          <a type="button" class="btn btn-sm btn-info" ng-click="vm.login()">
+            登录
+          </a>
+          <a type="button" ui-sref="register" class="btn btn-sm btn-info">
+            注册
+          </a>
+        </div>
+      </form>
     </div>
-
-    <div class="row">
-      <div class="col-sm-12 text-center">
-        <a type="button" class="btn btn-sm btn-primary" ng-click="vm.login()">
-          登录
-        </a>
-        <a type="button" ui-sref="sys.register" class="btn btn-sm btn-primary" ng-click="vm.register()">
-          注册
-        </a>
-      </div>
-    </div>
-  </form>  
+  </div>
+  <!--footer部分-->
+  <div class="footer">
+    <p class="text-center">
+      Copyright 2015, www.imwei.com. All rights reserved. | ICP证：苏-15002876 | 版本号: v1.14.1
+    </p>
+  </div>
 </div>

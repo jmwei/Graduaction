@@ -4,8 +4,28 @@ angular
   .config(config);
 
   function config($stateProvider,$urlRouterProvider) {
-    $urlRouterProvider.otherwise('/index');
+    $urlRouterProvider.otherwise('/login');
     $stateProvider
+      .state('login',{
+        url:'/login',
+        views: {
+          '': {
+            templateUrl: 'sys/views/login.html',
+            controller: 'loginCtrl',
+            controllerAs: 'vm'
+          }
+        }
+      })
+      .state('register',{
+        url:'/register',
+        views: {
+          '': {
+            templateUrl: 'sys/views/register.html',
+            controller: 'registerCtrl',
+            controllerAs: 'vm'
+          }
+        }
+      })
       .state('sys',{
         url:'/index',
         views: {
@@ -28,36 +48,10 @@ angular
           }
         }
       })
-      .state('sys.main.login',{
-        url:'/login',
-        templateUrl: 'sys/views/login.html',
-        controller: 'loginCtrl',
-        controllerAs: 'vm'
-      })
       .state('sys.main.information',{
         url:'/information',
         templateUrl: 'sys/views/information.html',
         controller: 'informationCtrl',
         controllerAs: 'vm'
-      })
-      /*.state('sys.main.login',{
-        url:'/login',
-        views: {
-          'main@sys': {
-            templateUrl: 'sys/views/login.html',
-            controller: 'loginCtrl',
-            controllerAs: 'vm'
-          }
-        }
-      })*/
-      .state('sys.register',{
-        url:'/register',
-        views: {
-          'main@sys': {
-            templateUrl: 'sys/views/register.html',
-            controller: 'registerCtrl',
-            controllerAs: 'vm'
-          }
-        }
       })
   }
