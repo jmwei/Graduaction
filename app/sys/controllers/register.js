@@ -8,8 +8,11 @@ function registerCtrl($scope){
   vm.register = register;
 
   function register(){
+    //初始化，使用Application ID和REST API Key
   	Bmob.initialize('7e492cbe197a97cecf3c0ad72120dd04', 'a7d52f0f857157f328fc36600b5b0034');
-  	var User = Bmob.Object.extend('user');
+    //创建Bmob.Object子类  	
+    var User = Bmob.Object.extend('user');
+    //创建该类的一个实例
     var User = new User();
 
     //监听两次密码输入是否一致

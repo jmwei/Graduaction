@@ -7,30 +7,28 @@
     color: #555;
     font-size: 25px;
     margin-left: 10px;
-    line-height: 100px;
+    line-height: 70px;
     text-shadow: 3px 3px 3px #b2dfee;
   }
 
   .content{
     clear: both;
     min-width: 1170px;
-    position: relative;
-    top: 25px;
+    height: 639px;
+    margin-left: -15px;
+    background: url('../images/homeBac.jpg');
 
-    .news{
-      #box{
-        visibility: hidden;
-        img{
-          width: 570px;
-          height: 330px;
-          border-radius: 5px;
-        }
-      }
-    }
-
-    .login{
+    /* 登录注册部分 */
+    .login-register{
       background: #f0f0f0;
       border: solid 1px #afd0f1;
+      margin-top: 145px;
+      margin-left: 50px;
+      opacity: 0.8;
+      filter: alpha(opacity=80);
+    } 
+    
+    .login{
       div{
         margin: 30px 0;
         .login-text{
@@ -53,13 +51,25 @@
             color: #f60;
           }
         }
-      }
-    }    
+      }      
+    }
+
+    .register{
+      .login-text{
+        color: #555;
+        font-size: 19px;
+        margin-top: 30px;
+      } 
+      .form-group{
+        padding: 23px 0px;
+      } 
+    }
+
   }
 
+  /*底部*/
   .footer{
     clear: both;
-    margin-top: 43%;
   }
 
 }

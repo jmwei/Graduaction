@@ -4,22 +4,25 @@ angular
   .config(config);
 
   function config($stateProvider,$urlRouterProvider) {
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/home');
     $stateProvider
-      .state('login',{
-        url:'/login',
+      .state('home',{
+        url:'/home',
         views: {
           '': {
+            templateUrl: 'sys/views/home.html'
+          },
+          '@home': {
             templateUrl: 'sys/views/login.html',
             controller: 'loginCtrl',
-            controllerAs: 'vm'
+            controllerAs: 'vm'            
           }
         }
       })
-      .state('register',{
+      .state('home.register',{
         url:'/register',
         views: {
-          '': {
+          '@home': {
             templateUrl: 'sys/views/register.html',
             controller: 'registerCtrl',
             controllerAs: 'vm'
@@ -34,10 +37,10 @@ angular
           },
           'topbar@sys': {
             templateUrl: 'sys/views/topbar.html'
-          },
+          }/*,
           'main@sys': {
             templateUrl: 'sys/views/home.html'
-          }
+          }*/
         }
       })
       .state('sys.main',{
