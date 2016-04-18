@@ -43,7 +43,7 @@ function registerCtrl($scope, $state){
     User.set('password', password);
     User.save(null, {
       success: function(object) {
-        $state.go('home.login');
+        $state.go('home');
       },
       error: function(model, error) {
         alert("注册失败");

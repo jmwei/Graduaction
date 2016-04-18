@@ -20,7 +20,7 @@
   <div class="form-group">
     <label class="control-label col-sm-3 mrt5">密码</label>
     <div class="col-sm-8" ng-class="{'has-error': (rtForm.userPwd.$touched || rtForm.$submitted) && rtForm.userPwd.$invalid}">
-      <input type="text" name="userPwd"
+      <input type="password" name="userPwd"
         class="form-control"
         ng-model="vm.user.userPwd"
         ng-model-options="{updateOn: 'blur'}"
@@ -61,7 +61,7 @@
     <a type="button" ui-sref="home" class="btn btn-sm btn-info" ng-click="vm.login()">
       登录
     </a>
-    <a type="button" ui-sref="home.register" class="btn btn-sm btn-info" ng-click="vm.register()">
+    <a type="button" class="btn btn-sm btn-info" ng-click="vm.register()">
       注册
     </a>
   </div>
