@@ -15,7 +15,7 @@ function loginCtrl($scope,$state){
     //创建该类的一个实例
   	var query = new Bmob.Query(User);
 
-    $scope.myForm.$setSubmitted();  
+    $scope.loginForm.$setSubmitted();
 
   	//查询数据
   	query.select('userName','password');
@@ -23,17 +23,19 @@ function loginCtrl($scope,$state){
   		var userName = vm.user.userName;
   		var password = vm.user.userPwd;
 
-  		var user = [];
+      //判断用户名和密码是否存在
+  		var userNameData = [],passwordData = [];
   		_.forEach(results, function (t){
-  			user.push(t.attributes)
+  			userNameData.push(t.attributes.userName);
+        passwordData.push(t.attributes.password)
   		})
+      vm.userNameIndex = _.indexOf(userNameData,userName);
+      vm.passwordIndex = _.indexOf(passwordData,password);
 
   		//登录时验证用户名、密码
-  		_.find(user, function (t){
-				if(userName === t.userName && password === t.password) {
-  				$state.go('sys')
-  			}
-  		})  		
+			if(vm.userNameIndex !== -1 && vm.passwordIndex !== -1) {
+				$state.go('sys')
+			}
   	})
   }
 }

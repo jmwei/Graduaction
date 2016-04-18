@@ -2,10 +2,24 @@ angular
   .module('sysApp')
   .controller('registerCtrl',registerCtrl);
 
-function registerCtrl($scope){
+function registerCtrl($scope, $state){
   var vm = this;
   vm.user = {};
   vm.register = register;
+  vm.confirm = confirm;
+
+  //监听两次密码输入是否一致
+  $scope.$watch('vm.user.confirmPwd', function (n){
+    if(!vm.user.userPwd){
+      return
+    }
+    if(n && n !== vm.user.userPwd){
+      vm.errMsg = '两次密码输入不一致';
+      vm.user.confirmPwd = '';
+    } else if(n && n === vm.user.userPwd){
+      vm.errMsg = '';
+    }
+  })
 
   function register(){
     //初始化，使用Application ID和REST API Key
@@ -15,12 +29,12 @@ function registerCtrl($scope){
     //创建该类的一个实例
     var User = new User();
 
-    //监听两次密码输入是否一致
-    /*$scope.$watch('vm.user.confirmPwd',function (){
-    	if('vm.user.confirmPwd !== vm.user.userPwd'){
-    		alert('11111');
-    	}
-    })*/
+    //表单验证
+    $scope.rtForm.$setSubmitted();
+    var $valid = $scope.rtForm.$valid;
+    if (!$valid){
+      return;
+    }
 
     var userName = vm.user.userName;
     var password = vm.user.userPwd;
@@ -29,7 +43,7 @@ function registerCtrl($scope){
     User.set('password', password);
     User.save(null, {
       success: function(object) {
-        alert('注册成功');
+        $state.go('home.login');
       },
       error: function(model, error) {
         alert("注册失败");

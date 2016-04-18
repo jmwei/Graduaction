@@ -1,21 +1,13 @@
 <form name="loginForm" class="login">
   <div><span class="login-text"><b>账号登录</b></span></div>
-  <div class="input-group" ng-class="{'has-error':(loginForm.$submitted || loginForm.username.$touched) && loginForm.username.$invalid}">
+  <div class="input-group">
     <span class="input-group-addon">
       <span class="glyphicon glyphicon-user"></span>
     </span>
     <input type="text" name="username" 
       class="form-control username" 
       ng-model="vm.user.userName"
-      placeholder="请输入用户名"
-      requried>
-      <div ng-messages="loginForm.username.$error"
-         ng-show="(loginForm.$submitted || loginForm.username.$touched) && loginForm.username.$invalid ">
-
-        <span class="form-control-static text-danger" ng-message="required">
-          *企业名称不能为空！
-        </span>
-      </div>
+      placeholder="请输入用户名">
   </div>
   <div class="input-group">
     <span class="input-group-addon">
@@ -25,11 +17,7 @@
       class="form-control password"
       ng-model="vm.user.userPwd"
       placeholder="请输入密码">
-  </div>
-  <div>
-    <input type="checkbox" name="checkbox"><span class="login-remember">30天内自动登录</span>
-    <span class="pull-right forget-pwd"><a href="javascript:;">忘记密码？</a></span>
-  </div>    
+  </div>  
   <div class="text-center">
     <a type="button" class="btn btn-sm btn-info" ng-click="vm.login()">
       登录
@@ -37,6 +25,17 @@
     <a type="button" ui-sref="home.register" class="btn btn-sm btn-info" ng-click="vm.register()">
       注册
     </a>
+  </div>
+  <div class="errMsg">
+    <div class="alert alert-warning errMsg" ng-if="vm.userNameIndex === -1 && vm.passwordIndex !== -1">
+      <p class="text-center">用户名不存在</p> 
+    </div>
+    <div class="alert alert-warning errMsg" ng-if="vm.userNameIndex !== -1 && vm.passwordIndex === -1">
+      <p class="text-center">密码错误</p> 
+    </div>
+    <div class="alert alert-warning errMsg" ng-if="vm.userNameIndex === -1 && vm.passwordIndex === -1">
+      <p class="text-center">请输入用户名和密码</p> 
+    </div>
   </div>
 </form>
 

@@ -4,5 +4,6 @@ angular
     'ui.router',
     'sys.routes',
     'smart-table',
+    'ngMessages',
     'ngTable'
   ])

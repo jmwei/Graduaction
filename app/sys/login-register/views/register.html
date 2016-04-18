@@ -1,0 +1,71 @@
+<form name="rtForm" class="register">
+  <div class="login-text"><span><b>账号注册</b></span></div>
+  <div class="form-group">
+    <label class="control-label col-sm-3 mrt5">用户名</label>
+    <div class="col-sm-8" ng-class="{'has-error': (rtForm.userName.$touched || rtForm.$submitted) && rtForm.userName.$invalid}">
+      <input type="text" name="userName"
+        class="form-control"
+        ng-model="vm.user.userName"
+        placeholder="请输入用户名" 
+        required>
+      <div ng-messages="rtForm.userName.$error"
+        ng-show="(rtForm.userName.$touched || rtForm.$submitted) && rtForm.userName.$invalid">
+        <span class="form-control-static text-danger" ng-message="required">
+          用户名不能为空！
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-3 mrt5">密码</label>
+    <div class="col-sm-8" ng-class="{'has-error': (rtForm.userPwd.$touched || rtForm.$submitted) && rtForm.userPwd.$invalid}">
+      <input type="text" name="userPwd"
+        class="form-control"
+        ng-model="vm.user.userPwd"
+        ng-model-options="{updateOn: 'blur'}"
+        ng-pattern="/^[a-zA-Z]\w{5,17}$/"
+        placeholder="密码需以字母开头" 
+        required>
+      <div ng-messages="rtForm.userPwd.$error" ng-show="(rtForm.userPwd.$touched || rtForm.$submitted) && rtForm.userPwd.$invalid">
+        <span class="form-control-static text-danger" ng-message="required">
+          密码不能为空
+        </span>
+        <span class="form-control-static text-danger" ng-message="pattern">
+          密码格式不正确
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-3 mrt5">确认密码</label>
+    <div class="col-sm-8" ng-class="{'has-error': (rtForm.confirmPwd.$touched || rtForm.$submitted) && rtForm.confirmPwd.$invalid}">
+      <input type="password" name="confirmPwd"
+        class="form-control"
+        ng-model="vm.user.confirmPwd"
+        ng-pattern="/^[a-zA-Z]\w{5,17}$/"
+        placeholder="密码需以字母开头" >
+      <div ng-messages="rtForm.confirmPwd.$error" ng-show="(rtForm.confirmPwd.$touched || rtForm.$submitted) && rtForm.confirmPwd.$invalid">
+        <span class="form-control-static text-danger" ng-message="required">
+          密码不能为空
+        </span>
+        <span class="form-control-static text-danger" ng-message="pattern">
+          密码格式不正确
+        </span>
+      </div>
+    </div>
+  </div>
+    
+  <div class="text-center form-group">
+    <a type="button" ui-sref="home" class="btn btn-sm btn-info" ng-click="vm.login()">
+      登录
+    </a>
+    <a type="button" ui-sref="home.register" class="btn btn-sm btn-info" ng-click="vm.register()">
+      注册
+    </a>
+  </div>
+  <div class="alert alert-warning errMsg" ng-show="vm.errMsg">
+    <p class="text-center">{{vm.errMsg}}</p> 
+  </div>
+</form>

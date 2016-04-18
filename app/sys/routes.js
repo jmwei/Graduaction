@@ -10,10 +10,10 @@ angular
         url:'/home',
         views: {
           '': {
-            templateUrl: 'sys/views/home.html'
+            templateUrl: 'sys/login-register/views/home.html'
           },
           '@home': {
-            templateUrl: 'sys/views/login.html',
+            templateUrl: 'sys/login-register/views/login.html',
             controller: 'loginCtrl',
             controllerAs: 'vm'            
           }
@@ -23,7 +23,7 @@ angular
         url:'/register',
         views: {
           '@home': {
-            templateUrl: 'sys/views/register.html',
+            templateUrl: 'sys/login-register/views/register.html',
             controller: 'registerCtrl',
             controllerAs: 'vm'
           }
@@ -33,10 +33,10 @@ angular
         url:'/index',
         views: {
           '': {
-            templateUrl: 'sys/views/index.html'
+            templateUrl: 'sys/managers/views/index.html'
           },
           'topbar@sys': {
-            templateUrl: 'sys/views/topbar.html'
+            templateUrl: 'sys/managers/views/topbar.html'
           }/*,
           'main@sys': {
             templateUrl: 'sys/views/home.html'
@@ -47,13 +47,13 @@ angular
         url:'/main',
         views: {
           'main@sys': {
-            templateUrl: 'sys/views/main.html',
+            templateUrl: 'sys/managers/views/main.html',
           }
         }
       })
       .state('sys.main.information',{
         url:'/information',
-        templateUrl: 'sys/views/information.html',
+        templateUrl: 'sys/managers/views/information.html',
         controller: 'informationCtrl',
         controllerAs: 'vm'
       })
