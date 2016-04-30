@@ -6,8 +6,8 @@ angular
   function config($stateProvider,$urlRouterProvider) {
     $urlRouterProvider.otherwise('/home');
     $stateProvider
-      .state('home',{
-        url:'/home',
+      .state('home', {
+        url: '/home',
         views: {
           '': {
             templateUrl: 'sys/login-register/views/home.html'
@@ -19,8 +19,8 @@ angular
           }
         }
       })
-      .state('home.register',{
-        url:'/register',
+      .state('home.register', {
+        url: '/register',
         views: {
           '@home': {
             templateUrl: 'sys/login-register/views/register.html',
@@ -29,32 +29,62 @@ angular
           }
         }
       })
-      .state('sys',{
-        url:'/index',
+      .state('sys', {
+        url: '/index',
         views: {
           '': {
             templateUrl: 'sys/managers/views/index.html'
           },
           'topbar@sys': {
             templateUrl: 'sys/managers/views/topbar.html'
-          }/*,
+          },
           'main@sys': {
-            templateUrl: 'sys/views/home.html'
-          }*/
+            templateUrl: 'sys/managers/views/main.html'
+          }
         }
       })
-      .state('sys.main',{
+      /*.state('sys.main',{
         url:'/main',
         views: {
           'main@sys': {
             templateUrl: 'sys/managers/views/main.html',
           }
         }
+      })*/
+      .state('sys.customerList', {
+        url: '/customerList',
+        templateUrl: 'sys/main/views/customer-list.html',
+        controller: 'customerListCtrl',
+        controllerAs: 'vm'
       })
-      .state('sys.main.information',{
-        url:'/information',
-        templateUrl: 'sys/managers/views/information.html',
-        controller: 'informationCtrl',
+      .state('sys.customerForm', {
+        url: '/customerForm',
+        templateUrl: 'sys/main/views/customer-form.html',
+        controller: 'customerFormCtrl',
+        controllerAs: 'vm'
+      })
+      .state('sys.customerEdit', {
+        url: '/customerEdit/:id',
+        templateUrl: 'sys/main/views/customer-edit.html',
+        controller: 'customerEditCtrl',
+        controllerAs: 'vm'
+      })
+      .state('sys.roomList', {
+        url: '/roomList',
+        templateUrl: 'sys/main/views/room-list.html',
+        controller: 'roomListCtrl',
+        controllerAs: 'vm'
+      })
+      .state('sys.roomForm', {
+        url: '/roomForm',
+        templateUrl: 'sys/main/views/room-form.html',
+        controller: 'roomFormCtrl',
+        controllerAs: 'vm'
+      })
+      .state('sys.orderList',{
+        url:'/orderList',
+        templateUrl: 'sys/main/views/order-list.html',
+        controller: 'orderListCtrl',
         controllerAs: 'vm'
       })
   }

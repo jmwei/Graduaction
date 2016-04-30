@@ -1,0 +1,84 @@
+<legend class="fm">
+	<span>添加客户信息</span>
+</legend>
+<form name="customerForm" class="form-horizontal">
+  <div class="form-group">
+    <label class="control-label col-sm-3 fm">姓名</label>
+    <div class="col-sm-5" ng-class="{'has-error': (customerForm.name.$touched || customerForm.$submitted) && customerForm.name.$invalid}">
+      <input type="text" name="name"
+        class="form-control"
+        ng-model="vm.customer.name" 
+        required>
+      <div ng-messages="customerForm.name.$error"
+        ng-show="(customerForm.name.$touched || customerForm.$submitted) && customerForm.name.$invalid">
+        <span class="form-control-static text-danger" ng-message="required">
+          姓名不能为空！
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-3 fm">性別</label>
+    <div class="col-sm-5">
+      <label class="checkbox-inline">
+        <input type="radio" name="sex"
+          ng-value="0"
+          ng-model="vm.customer.sex">&nbsp;&nbsp;男
+      </label>
+      <label class="checkbox-inline">
+        <input type="radio" name="sex"
+          ng-value="1"
+          ng-model="vm.customer.sex">&nbsp;&nbsp;女
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-3 fm">手机号码</label>
+    <div class="col-sm-5" ng-class="{'has-error': (customerForm.phone.$touched || customerForm.$submitted) && customerForm.phone.$invalid}">
+      <input type="text" name="phone"
+        class="form-control"
+        ng-model="vm.customer.phone"
+        ng-pattern="/^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/">
+      <div ng-messages="customerForm.phone.$error"
+        ng-show="(customerForm.phone.$touched || customerForm.$submitted) && customerForm.phone.$invalid">
+        <span class="form-control-static text-danger" ng-message="pattern">
+          手机号不正确！
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-3 fm">身份证号</label>
+    <div class="col-sm-5" ng-class="{'has-error': (customerForm.idc.$touched || customerForm.$submitted) && customerForm.idc.$invalid}">
+      <input type="text" name="idc"
+        class="form-control"
+        ng-model="vm.customer.idc"
+        ng-pattern="/(^\d{18}$)|(^\d{17}(\d|X|x)$)/">
+      <div ng-messages="customerForm.idc.$error"
+        ng-show="(customerForm.idc.$touched || customerForm.$submitted) && customerForm.idc.$invalid">
+        <span class="form-control-static text-danger" ng-message="pattern">
+          身份证号不正确！
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-3 fm">住址</label>
+    <div class="col-sm-5">
+      <input type="text" name="address"
+        class="form-control"
+        ng-model="vm.customer.address">
+    </div>
+  </div>
+
+  <div class="form-group text-center">
+    <a type="button" class="btn btn-sm btn-info" ng-click="vm.save()">
+      保存
+    </a>
+  </div>
+	
+</form>

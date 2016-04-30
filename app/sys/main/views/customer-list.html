@@ -1,0 +1,48 @@
+<legend class="fm">
+	<span>客户管理</span>
+	<a type="button" class="btn btn-xs btn-primary pull-right fm" ui-sref="sys.customerForm">新增</a>
+</legend>
+<table st-table="vm.info" st-safe-src="vm.customerInfo" class="table table-striped table-bordered">
+  <thead>
+  	<tr>
+  		<th colspan="2">
+				<input st-search="name" placeholder="search by name" class="input-sm form-control" type="search"/>
+			</th>
+			<th colspan="2">
+				<input st-search="address" placeholder="search by address" class="input-sm form-control" type="search"/>
+			</th>
+  	</tr>
+    <tr>
+      <th st-sort="name" class="fm">姓名</th>
+      <th st-sort="sex" class="fm">性别</th>
+      <th st-sort="phone" class="fm">手机号码</th>
+      <th st-sort="idc" class="fm">证件号</th>
+      <th st-sort="address" class="fm">住址</th>
+      <th st-sort="address" class="fm">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="t in vm.info">
+      <td class="fm">{{t.name}}</td>
+      <td class="fm">{{{0:'男',1:'女'}[t.sex]}}</td>
+      <td class="fm">{{t.phone}}</td>
+      <td class="fm">{{t.idc}}</td>
+      <td class="fm">{{t.address}}</td>
+      <td>
+      	<span class="text-info">
+      		<a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+      	</span>
+      	<span class="text-danger mrl10">
+      		<a ng-click="vm.remove(t)"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+      	</span>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="6" class="text-center">
+        <div st-pagination="" st-items-by-page="vm.itemsByPage" st-displayed-pages="5"></div>
+      </td>
+    </tr>
+  </tfoot>
+</table>

@@ -1,0 +1,51 @@
+<legend class="fm">
+	<span>房间管理</span>
+	<a type="button" class="btn btn-xs btn-primary pull-right fm" ui-sref="sys.roomForm">新增</a>
+</legend>
+<table st-table="vm.info" st-safe-src="vm.roomInfo" class="table table-striped table-bordered">
+  <thead>
+  	<tr>
+  		<th colspan="2">
+				<input st-search="roomNo" placeholder="search by roomNo" class="input-sm form-control" type="search"/>
+			</th>
+  	</tr>
+    <tr>
+      <th st-sort="roomNo" class="fm">房间号</th>
+      <th st-sort="roomPrice" class="fm">房间价格</th>
+      <th st-sort="roomFloor" class="fm">所在楼层</th>
+      <th st-sort="roomArea" class="fm">面积</th>
+      <th st-sort="roomType" class="fm">房间类型</th>
+      <th st-sort="roomState" class="fm">入住状态</th>
+      <th st-sort="roomDescription" class="fm">房间描述</th>
+      <th st-sort="" class="fm">操作</th>
+      <th st-sort="" class="fm">预订</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="t in vm.info">
+      <td class="fm">{{t.roomNo}}</td>
+      <td class="fm text-danger">{{t.roomPrice | currency:"￥"}}</td>
+      <td class="fm">{{t.roomFloor}}</td>
+      <td class="fm">{{t.roomArea}}</td>
+      <td class="fm">{{{1:'单人间',2:'双人间',3:'标准间',4:'套房间'}[t.roomType]}}</td>
+      <td class="fm">{{{0:'未入住',1:'已入住'}[t.roomState]}}</td>
+      <td class="fm">{{t.roomDescription}}</td>
+      <td>
+      	<span class="text-info">
+      		<a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+      	</span>
+      	<span class="text-danger mrl10">
+      		<a ng-click="vm.remove(t)"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+      	</span>
+      </td>
+      <td><a type="button" class="btn btn-xs btn-primary">预订</a></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="9" class="text-center">
+        <div st-pagination="" st-items-by-page="vm.itemsByPage" st-displayed-pages="5"></div>
+      </td>
+    </tr>
+  </tfoot>
+</table>

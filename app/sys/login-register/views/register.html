@@ -1,7 +1,7 @@
 <form name="rtForm" class="register">
-  <div class="login-text"><span><b>账号注册</b></span></div>
+  <div class="login-text fm"><span>账号注册</span></div>
   <div class="form-group">
-    <label class="control-label col-sm-3 mrt5">用户名</label>
+    <label class="control-label col-sm-3 mrt5 fm">用户名</label>
     <div class="col-sm-8" ng-class="{'has-error': (rtForm.userName.$touched || rtForm.$submitted) && rtForm.userName.$invalid}">
       <input type="text" name="userName"
         class="form-control"
@@ -10,7 +10,7 @@
         required>
       <div ng-messages="rtForm.userName.$error"
         ng-show="(rtForm.userName.$touched || rtForm.$submitted) && rtForm.userName.$invalid">
-        <span class="form-control-static text-danger" ng-message="required">
+        <span class="form-control-static text-danger fm" ng-message="required">
           用户名不能为空！
         </span>
       </div>
@@ -18,7 +18,41 @@
   </div>
 
   <div class="form-group">
-    <label class="control-label col-sm-3 mrt5">密码</label>
+    <label class="control-label col-sm-3 mrt5 fm">手机号</label>
+    <div class="col-sm-8" ng-class="{'has-error': (rtForm.phone.$touched || rtForm.$submitted) && rtForm.phone.$invalid}">
+      <input type="text" name="phone"
+        class="form-control"
+        ng-model="vm.user.phone"
+        placeholder="请输入手机号"
+        ng-pattern="/^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/">
+      <div ng-messages="rtForm.phone.$error"
+        ng-show="(rtForm.phone.$touched || rtForm.$submitted) && rtForm.phone.$invalid">
+        <span class="form-control-static text-danger fm" ng-message="pattern">
+          手机号不正确！
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-3 mrt5 fm">邮箱</label>
+    <div class="col-sm-8" ng-class="{'has-error': (rtForm.email.$touched || email.$submitted) && rtForm.email.$invalid}">
+      <input type="text" name="email"
+        class="form-control"
+        ng-model="vm.user.email"
+        placeholder="请输入邮箱"
+        ng-pattern="/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/">
+      <div ng-messages="rtForm.email.$error"
+        ng-show="(rtForm.email.$touched || rtForm.$submitted) && rtForm.email.$invalid">
+        <span class="form-control-static text-danger fm" ng-message="pattern">
+          邮箱不正确！
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-3 mrt5 fm">密码</label>
     <div class="col-sm-8" ng-class="{'has-error': (rtForm.userPwd.$touched || rtForm.$submitted) && rtForm.userPwd.$invalid}">
       <input type="password" name="userPwd"
         class="form-control"
@@ -28,10 +62,10 @@
         placeholder="密码需以字母开头" 
         required>
       <div ng-messages="rtForm.userPwd.$error" ng-show="(rtForm.userPwd.$touched || rtForm.$submitted) && rtForm.userPwd.$invalid">
-        <span class="form-control-static text-danger" ng-message="required">
+        <span class="form-control-static text-danger fm" ng-message="required">
           密码不能为空
         </span>
-        <span class="form-control-static text-danger" ng-message="pattern">
+        <span class="form-control-static text-danger fm" ng-message="pattern">
           密码格式不正确
         </span>
       </div>
@@ -39,7 +73,7 @@
   </div>
 
   <div class="form-group">
-    <label class="control-label col-sm-3 mrt5">确认密码</label>
+    <label class="control-label col-sm-3 mrt5 fm">确认密码</label>
     <div class="col-sm-8" ng-class="{'has-error': (rtForm.confirmPwd.$touched || rtForm.$submitted) && rtForm.confirmPwd.$invalid}">
       <input type="password" name="confirmPwd"
         class="form-control"
@@ -47,10 +81,10 @@
         ng-pattern="/^[a-zA-Z]\w{5,17}$/"
         placeholder="密码需以字母开头" >
       <div ng-messages="rtForm.confirmPwd.$error" ng-show="(rtForm.confirmPwd.$touched || rtForm.$submitted) && rtForm.confirmPwd.$invalid">
-        <span class="form-control-static text-danger" ng-message="required">
+        <span class="form-control-static text-danger fm" ng-message="required">
           密码不能为空
         </span>
-        <span class="form-control-static text-danger" ng-message="pattern">
+        <span class="form-control-static text-danger fm" ng-message="pattern">
           密码格式不正确
         </span>
       </div>
@@ -58,14 +92,14 @@
   </div>
     
   <div class="text-center form-group">
-    <a type="button" ui-sref="home" class="btn btn-sm btn-info" ng-click="vm.login()">
+    <a type="button" ui-sref="home" class="btn btn-sm btn-info fm" ng-click="vm.login()">
       登录
     </a>
-    <a type="button" class="btn btn-sm btn-info" ng-click="vm.register()">
+    <a type="button" class="btn btn-sm btn-info fm" ng-click="vm.register()">
       注册
     </a>
   </div>
-  <div class="alert alert-warning errMsg" ng-show="vm.errMsg">
+  <div class="alert alert-warning errMsg fm" ng-show="vm.errMsg">
     <p class="text-center">{{vm.errMsg}}</p> 
   </div>
 </form>
