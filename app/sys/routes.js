@@ -63,6 +63,12 @@ angular
         controller: 'customerFormCtrl',
         controllerAs: 'vm'
       })
+      .state('sys.customerEdit', {
+        url: '/customerEdit/:id',
+        templateUrl: 'sys/main/views/customer-edit.html',
+        controller: 'customerEditCtrl',
+        controllerAs: 'vm'
+      })
       .state('sys.roomList', {
         url: '/roomList',
         templateUrl: 'sys/main/views/room-list.html',

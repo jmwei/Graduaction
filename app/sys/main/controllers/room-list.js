@@ -11,14 +11,47 @@ function roomListCtrl ($scope){
   var query = new Bmob.Query(Info);
 
   var vm = this;
+  vm.remove = remove;
+
+  //数据列表展示
   vm.itemsByPage = 10;
-  query.select('roomNo','roomPrice','roomFloor','roomArea','roomType','roomState','roomDescription');
-  vm.roomInfo = [];
-  query.find().then(function (results){
-    _.forEach(results,function (t){
-      vm.roomInfo.push(t.attributes);
+
+  function initData(){
+    query.select('roomNo','roomPrice','roomFloor','roomArea','roomType','roomState','roomDescription');
+    vm.roomInfo = [];
+    query.find().then(function (results){
+      vm.data = results;
+      console.log(vm.data)
+      _.forEach(results,function (t){
+        vm.roomInfo.push(t.attributes);
+      });
+      $scope.$apply();
+    })    
+  }
+  initData();
+
+  //删除数据
+  function remove(t) {
+    var index = vm.roomInfo.indexOf(t);
+    console.log(vm.data[index].id)
+    query.get(vm.data[index].id, {
+      success: function(room) {
+        // 查询成功，删除数据
+        var roomData = room;
+        roomData.destroy({
+          success: function(room){
+            window.location.reload();
+          },
+          error: function(room,error){
+            alert('删除失败');
+          }
+        })
+      },
+      error: function(object, error) {
+        // 查询失败
+        alert('查询失败');
+      }
     });
-    $scope.$apply();
-  })
+  }
 
 }

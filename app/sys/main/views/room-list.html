@@ -18,6 +18,7 @@
       <th st-sort="roomState" class="fm">入住状态</th>
       <th st-sort="roomDescription" class="fm">房间描述</th>
       <th st-sort="" class="fm">操作</th>
+      <th st-sort="" class="fm">预订</th>
     </tr>
   </thead>
   <tbody>
@@ -34,14 +35,15 @@
       		<a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
       	</span>
       	<span class="text-danger mrl10">
-      		<a><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+      		<a ng-click="vm.remove(t)"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
       	</span>
       </td>
+      <td><a type="button" class="btn btn-xs btn-primary">预订</a></td>
     </tr>
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="8" class="text-center">
+      <td colspan="9" class="text-center">
         <div st-pagination="" st-items-by-page="vm.itemsByPage" st-displayed-pages="5"></div>
       </td>
     </tr>
