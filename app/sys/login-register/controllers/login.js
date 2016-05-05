@@ -2,7 +2,7 @@ angular
   .module('sysApp')
   .controller('loginCtrl',loginCtrl);
 
-function loginCtrl($scope,$state){
+function loginCtrl($scope,$state,$cookieStore){
   var vm = this;
   vm.user = {};
   vm.login = login;
@@ -17,11 +17,14 @@ function loginCtrl($scope,$state){
 
     $scope.loginForm.$setSubmitted();
 
+    var userName = vm.user.userName;
+    var password = vm.user.userPwd;
+    //用户名存储在cookie中
+    $cookieStore.put('userName', userName);
+
   	//查询数据
   	query.select('userName','password');
   	query.find().then(function (results){
-  		var userName = vm.user.userName;
-  		var password = vm.user.userPwd;
 
       //判断用户名和密码是否存在
   		var userNameData = [],passwordData = [];

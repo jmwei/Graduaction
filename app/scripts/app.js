@@ -5,5 +5,6 @@ angular
     'sys.routes',
     'smart-table',
     'ngMessages',
-    'ngTable'
+    'ngTable',
+    'ngCookies'
   ])

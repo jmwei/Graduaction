@@ -2,7 +2,7 @@ angular
   .module('sysApp')
   .controller('customerListCtrl',customerListCtrl);
 
-function customerListCtrl ($scope){
+function customerListCtrl ($scope,$cookieStore){
   //初始化，使用Application ID和REST API Key
   Bmob.initialize('7e492cbe197a97cecf3c0ad72120dd04', 'a7d52f0f857157f328fc36600b5b0034');
   //创建Bmob.Object子类
@@ -12,9 +12,13 @@ function customerListCtrl ($scope){
 
   var vm = this;
   vm.remove = remove;
+  vm.edit = edit;
 
   //数据列表展示
   vm.itemsByPage = 10;
+
+  //获取登陆用户
+  vm.userName = $cookieStore.get('userName');
 
   function initData(){
     query.select('name','sex','phone','idc','address');
@@ -29,6 +33,29 @@ function customerListCtrl ($scope){
   }
   initData();
 
+  //修改数据
+  function edit(t) {
+    //模态框展示和隐藏
+    $('#myModal').fadeIn();
+    $('.close').click(function(){
+      $('#myModal').fadeOut();
+    })
+
+    var index = vm.customerInfo.indexOf(t);
+    //console.log(vm.data[index].id)
+    query.get(vm.data[index].id, {
+      success: function(customer) {
+        // 查询成功
+        var customerData = customer.attributes;
+        vm.editCustomer = customerData;
+        console.log(customerData.name);
+      },
+      error: function(object, error) {
+        // 查询失败
+        alert('查询失败');
+      }
+    });
+  }
 
   //删除数据
   function remove(t) {

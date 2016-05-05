@@ -10,15 +10,23 @@
 			</th>
   	</tr>
     <tr>
-      <th st-sort="roomNo" class="fm">房间号</th>
-      <th st-sort="roomPrice" class="fm">房间价格</th>
-      <th st-sort="roomFloor" class="fm">所在楼层</th>
-      <th st-sort="roomArea" class="fm">面积</th>
-      <th st-sort="roomType" class="fm">房间类型</th>
-      <th st-sort="roomState" class="fm">入住状态</th>
-      <th st-sort="roomDescription" class="fm">房间描述</th>
-      <th st-sort="" class="fm">操作</th>
-      <th st-sort="" class="fm">预订</th>
+      <th st-sort="roomNo" class="fm">
+        房间号<i class="fa fa-sort" aria-hidden="true"></i>
+      </th>
+      <th st-sort="roomPrice" class="fm">
+        房间价格<i class="fa fa-sort" aria-hidden="true"></i>
+      </th>
+      <th st-sort="roomFloor" class="fm">
+        所在楼层<i class="fa fa-sort" aria-hidden="true"></i>
+      </th>
+      <th st-sort="roomArea" class="fm">
+        面积<i class="fa fa-sort" aria-hidden="true"></i>
+      </th>
+      <th class="fm">房间类型</th>
+      <th class="fm">入住状态</th>
+      <th class="fm">房间描述</th>
+      <th class="text-center fm">操作</th>
+      <th class="text-center fm">预订</th>
     </tr>
   </thead>
   <tbody>
@@ -30,15 +38,131 @@
       <td class="fm">{{{1:'单人间',2:'双人间',3:'标准间',4:'套房间'}[t.roomType]}}</td>
       <td class="fm">{{{0:'未入住',1:'已入住'}[t.roomState]}}</td>
       <td class="fm">{{t.roomDescription}}</td>
-      <td>
+      <td class="text-center">
       	<span class="text-info">
       		<a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
       	</span>
-      	<span class="text-danger mrl10">
+      	<span ng-show="vm.userName === 'admin'" class="text-danger mrl10">
       		<a ng-click="vm.remove(t)"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
       	</span>
       </td>
-      <td><a type="button" class="btn btn-xs btn-primary">预订</a></td>
+      <td class="text-center">
+        <a type="button" class="btn btn-xs btn-primary" ng-click="vm.order(t)">预订</a>
+        <!-- 预订页面模态框（Modal） -->
+        <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" aria-hidden="true">
+                      &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                  房间预订
+                </h4>
+              </div>
+              <div class="modal-body">
+                <form name="orderRoomForm" class="form-horizontal">
+                  <div class="form-group">
+                    <label class="control-label col-sm-3 col-sm-offset-1 fm">入住人</label>
+                    <div class="col-sm-5" ng-class="{'has-error': (orderRoomForm.checkInName.$touched || orderRoomForm.$submitted) && orderRoomForm.checkInName.$invalid}">
+                      <input type="text" name="checkInName"
+                        class="form-control"
+                        ng-model="vm.room.checkInName"
+                        required>
+                      <div ng-messages="orderRoomForm.checkInName.$error"
+                        ng-show="(orderRoomForm.checkInName.$touched || orderRoomForm.$submitted) && orderRoomForm.checkInName.$invalid">
+                        <span class="form-control-static text-danger fm" ng-message="required">
+                          入住人不能为空！
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-sm-3 col-sm-offset-1 fm">入住天数</label>
+                    <div class="col-sm-5">
+                      <input type="number" name="checkInDays"
+                        class="form-control"
+                        min="1"
+                        ng-model="vm.room.checkInDays">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-sm-3 col-sm-offset-1 fm">房间号</label>
+                    <div class="col-sm-5">
+                      <input type="number" name="roomNo"
+                        class="form-control"
+                        ng-model="vm.room.roomNo"
+                        disabled="disabled">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-sm-3 col-sm-offset-1 fm">房间价格</label>
+                    <div class="col-sm-5">
+                      <input type="number" name="roomPrice"
+                        class="form-control"
+                        ng-model="vm.room.roomPrice"
+                        disabled="disabled">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-sm-3 col-sm-offset-1 fm">所在楼层</label>
+                    <div class="col-sm-5">
+                      <input type="number" name="roomFloor"
+                        class="form-control"
+                        ng-model="vm.room.roomFloor"
+                        disabled="disabled">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-sm-3 col-sm-offset-1 fm">面积</label>
+                    <div class="col-sm-5">
+                      <input type="number" name="roomArea"
+                        class="form-control"
+                        min="30"
+                        ng-model="vm.room.roomArea"
+                        disabled="disabled">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-sm-3 col-sm-offset-1 fm">房间类型</label>
+                    <div class="col-sm-5">
+                      <select name="roomType"
+                        class="form-control fm"
+                        ng-options="t.code as t.name for t in vm.roomType"
+                        ng-model="vm.room.roomType"
+                        disabled="disabled"> 
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-sm-3 col-sm-offset-1 fm">房间描述</label>
+                    <div class="col-sm-5">
+                      <input type="text" name="roomDescription"
+                        class="form-control"
+                        ng-model="vm.room.roomDescription"
+                        disabled="disabled">
+                    </div>
+                  </div>
+
+                  <div class="form-group text-center">
+                    <a type="button" class="btn btn-sm btn-info" ng-click="vm.book()">
+                      确认
+                    </a>
+                  </div>
+                  
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
     </tr>
   </tbody>
   <tfoot>

@@ -36,7 +36,9 @@ angular
             templateUrl: 'sys/managers/views/index.html'
           },
           'topbar@sys': {
-            templateUrl: 'sys/managers/views/topbar.html'
+            templateUrl: 'sys/managers/views/topbar.html',
+            controller: 'topBarCtrl',
+            controllerAs: 'vm'
           },
           'main@sys': {
             templateUrl: 'sys/managers/views/main.html'

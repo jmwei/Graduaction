@@ -13,12 +13,12 @@
 			</th>
   	</tr>
     <tr>
-      <th st-sort="name" class="fm">姓名</th>
-      <th st-sort="sex" class="fm">性别</th>
-      <th st-sort="phone" class="fm">手机号码</th>
-      <th st-sort="idc" class="fm">证件号</th>
-      <th st-sort="address" class="fm">住址</th>
-      <th st-sort="address" class="fm">操作</th>
+      <th class="fm">姓名</th>
+      <th class="fm">性别</th>
+      <th class="fm">手机号码</th>
+      <th class="fm">证件号</th>
+      <th class="fm">住址</th>
+      <th class="text-center fm">操作</th>
     </tr>
   </thead>
   <tbody>
@@ -28,13 +28,112 @@
       <td class="fm">{{t.phone}}</td>
       <td class="fm">{{t.idc}}</td>
       <td class="fm">{{t.address}}</td>
-      <td>
+      <td class="text-center">
       	<span class="text-info">
-      		<a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+      		<a ng-click="vm.edit(t)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
       	</span>
-      	<span class="text-danger mrl10">
+      	<span ng-show="vm.userName === 'admin'" class="text-danger mrl10">
       		<a ng-click="vm.remove(t)"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
       	</span>
+
+        <!-- 编辑页面模态框（Modal） -->
+        <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" aria-hidden="true">
+                      &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                  客户信息编辑
+                </h4>
+              </div>
+              <div class="modal-body">
+                <form name="editCustomerForm" class="form-horizontal">
+                  <div class="form-group">
+                    <label class="control-label col-sm-3 fm">姓名</label>
+                    <div class="col-sm-5" ng-class="{'has-error': (editCustomerForm.name.$touched || editCustomerForm.$submitted) && editCustomerForm.name.$invalid}">
+                      <input type="text" name="name"
+                        class="form-control"
+                        ng-model="vm.editCustomer.name" 
+                        required>
+                      <div ng-messages="editCustomerForm.name.$error"
+                        ng-show="(editCustomerForm.name.$touched || editCustomerForm.$submitted) && editCustomerForm.name.$invalid">
+                        <span class="form-control-static text-danger" ng-message="required">
+                          姓名不能为空！
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-sm-3 fm">性別</label>
+                    <div class="col-sm-5">
+                      <label class="checkbox-inline">
+                        <input type="radio" name="sex"
+                          ng-value="0"
+                          ng-model="vm.editCustomer.sex">&nbsp;&nbsp;男
+                      </label>
+                      <label class="checkbox-inline">
+                        <input type="radio" name="sex"
+                          ng-value="1"
+                          ng-model="vm.editCustomer.sex">&nbsp;&nbsp;女
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-sm-3 fm">手机号码</label>
+                    <div class="col-sm-5" ng-class="{'has-error': (editCustomerForm.phone.$touched || editCustomerForm.$submitted) && editCustomerForm.phone.$invalid}">
+                      <input type="text" name="phone"
+                        class="form-control"
+                        ng-model="vm.editCustomer.phone"
+                        ng-pattern="/^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/">
+                      <div ng-messages="editCustomerForm.phone.$error"
+                        ng-show="(editCustomerForm.phone.$touched || editCustomerForm.$submitted) && editCustomerForm.phone.$invalid">
+                        <span class="form-control-static text-danger" ng-message="pattern">
+                          手机号不正确！
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-sm-3 fm">身份证号</label>
+                    <div class="col-sm-5" ng-class="{'has-error': (editCustomerForm.idc.$touched || editCustomerForm.$submitted) && editCustomerForm.idc.$invalid}">
+                      <input type="text" name="idc"
+                        class="form-control"
+                        ng-model="vm.editCustomer.idc"
+                        ng-pattern="/(^\d{18}$)|(^\d{17}(\d|X|x)$)/">
+                      <div ng-messages="editCustomerForm.idc.$error"
+                        ng-show="(editCustomerForm.idc.$touched || editCustomerForm.$submitted) && editCustomerForm.idc.$invalid">
+                        <span class="form-control-static text-danger" ng-message="pattern">
+                          身份证号不正确！
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-sm-3 fm">住址</label>
+                    <div class="col-sm-5">
+                      <input type="text" name="address"
+                        class="form-control"
+                        ng-model="vm.editCustomer.address">
+                    </div>
+                  </div>
+
+                  <div class="form-group text-center">
+                    <a type="button" class="btn btn-sm btn-info">
+                      保存
+                    </a>
+                  </div>
+                  
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </td>
     </tr>
   </tbody>
