@@ -2,7 +2,7 @@ angular
   .module('sysApp')
   .controller('roomListCtrl',roomListCtrl);
 
-function roomListCtrl ($scope,$state,$cookieStore, RoomType){
+function roomListCtrl ($scope,$cookieStore, RoomType){
   //初始化，使用Application ID和REST API Key
   Bmob.initialize('7e492cbe197a97cecf3c0ad72120dd04', 'a7d52f0f857157f328fc36600b5b0034');
   //创建Bmob.Object子类
@@ -40,7 +40,7 @@ function roomListCtrl ($scope,$state,$cookieStore, RoomType){
   //删除数据
   function remove(t) {
     var index = vm.roomInfo.indexOf(t);
-    //console.log(vm.data[index].id)
+    console.log(vm.data[index].id)
     query.get(vm.data[index].id, {
       success: function(room) {
         // 查询成功，删除数据
