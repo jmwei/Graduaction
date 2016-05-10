@@ -45,14 +45,6 @@ angular
           }
         }
       })
-      /*.state('sys.main',{
-        url:'/main',
-        views: {
-          'main@sys': {
-            templateUrl: 'sys/managers/views/main.html',
-          }
-        }
-      })*/
       .state('sys.customerList', {
         url: '/customerList',
         templateUrl: 'sys/main/views/customer-list.html',
