@@ -41,7 +41,9 @@ angular
             controllerAs: 'vm'
           },
           'main@sys': {
-            templateUrl: 'sys/managers/views/main.html'
+            templateUrl: 'sys/managers/views/main.html',
+            controller: 'mainCtrl',
+            controllerAs: 'vm'
           }
         }
       })
@@ -55,12 +57,6 @@ angular
         url: '/customerForm',
         templateUrl: 'sys/main/views/customer-form.html',
         controller: 'customerFormCtrl',
-        controllerAs: 'vm'
-      })
-      .state('sys.customerEdit', {
-        url: '/customerEdit/:id',
-        templateUrl: 'sys/main/views/customer-edit.html',
-        controller: 'customerEditCtrl',
         controllerAs: 'vm'
       })
       .state('sys.roomList', {

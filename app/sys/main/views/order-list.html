@@ -22,7 +22,7 @@
       </th>
       <th class="fm">房间类型</th>
       <th class="fm">房间描述</th>
-      <th class="text-center fm">操作</th>
+      <th class="text-center fm" ng-show="vm.userName === 'admin'">操作</th>
     </tr>
   </thead>
   <tbody>
@@ -34,11 +34,11 @@
       <td class="fm">{{t.roomFloor}}</td>
       <td class="fm">{{{1:'单人间',2:'双人间',3:'标准间',4:'套房间'}[t.roomType]}}</td>
       <td class="fm">{{t.roomDescription}}</td>
-      <td class="text-center">
-        <span class="text-info">
+      <td class="text-center" ng-show="vm.userName === 'admin'">
+        <!-- <span class="text-info">
           <a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-        </span>
-        <span ng-show="vm.userName === 'admin'" class="text-danger mrl10">
+        </span> -->
+        <span class="text-danger mrl10">
           <a ng-click="vm.remove(t)"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
         </span>
       </td>

@@ -2,7 +2,7 @@ angular
   .module('sysApp')
   .controller('roomListCtrl',roomListCtrl);
 
-function roomListCtrl ($scope,$cookieStore, RoomType){
+function roomListCtrl ($scope,$cookieStore,RoomType,RoomState){
   //初始化，使用Application ID和REST API Key
   Bmob.initialize('7e492cbe197a97cecf3c0ad72120dd04', 'a7d52f0f857157f328fc36600b5b0034');
   //创建Bmob.Object子类
@@ -13,9 +13,11 @@ function roomListCtrl ($scope,$cookieStore, RoomType){
   var vm = this;
   vm.remove = remove;
   vm.order = order;
+  vm.edit = edit;
 
   //获取静态数据
   vm.roomType = RoomType;
+  vm.roomState = RoomState;
 
   //数据列表展示
   vm.itemsByPage = 10;
@@ -36,6 +38,62 @@ function roomListCtrl ($scope,$cookieStore, RoomType){
     })    
   }
   initData();
+
+  //修改数据
+  function edit(t) {
+    //模态框展示和隐藏
+    $('#roomModal').fadeIn();
+    $('.close').click(function(){
+      $('#roomModal').fadeOut();
+    })
+
+    var index = vm.roomInfo.indexOf(t);
+    //console.log(vm.data[index].id)
+    query.get(vm.data[index].id, {
+      success: function(obj) {
+        // 查询成功
+        var roomData = obj.attributes;
+        vm.editRoom = roomData;
+        //console.log(roomData.roomNo);
+
+        vm.book = book;
+        //初始化，使用Application ID和REST API Key
+        Bmob.initialize('7e492cbe197a97cecf3c0ad72120dd04', 'a7d52f0f857157f328fc36600b5b0034');
+        //创建Bmob.Object子类
+        var Info = Bmob.Object.extend('room');
+        //创建该类的一个实例  
+        var query = new Info();
+        function book(){
+          var roomNo = vm.editRoom.roomNo;
+          var roomPrice = vm.editRoom.roomPrice;
+          var roomFloor = vm.editRoom.roomFloor;
+          var roomArea = vm.editRoom.roomArea;
+          var roomType = vm.editRoom.roomType;
+          var roomState = vm.editRoom.roomState;
+          var roomDescription = vm.editRoom.roomDescription;
+          query.set('roomNo', roomNo);
+          query.set('roomPrice', roomPrice);
+          query.set('roomFloor', roomFloor);
+          query.set('roomArea', roomArea);
+          query.set('roomType', roomType);
+          query.set('roomState', roomState);
+          query.set('roomDescription', roomDescription);
+          query.save(null, {
+            success: function(object) {
+              window.location.reload();
+            },
+            error: function(model, error) {
+              alert('保存失败');
+            }
+          });
+        }
+      },
+      error: function(object, error) {
+        // 查询失败
+        alert('查询失败');
+      }
+    });
+  }
 
   //删除数据
   function remove(t) {
