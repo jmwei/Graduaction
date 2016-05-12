@@ -57,12 +57,6 @@ function roomListCtrl ($scope,$cookieStore,RoomType,RoomState){
         //console.log(roomData.roomNo);
 
         vm.book = book;
-        //初始化，使用Application ID和REST API Key
-        Bmob.initialize('7e492cbe197a97cecf3c0ad72120dd04', 'a7d52f0f857157f328fc36600b5b0034');
-        //创建Bmob.Object子类
-        var Info = Bmob.Object.extend('room');
-        //创建该类的一个实例  
-        var query = new Info();
         function book(){
           var roomNo = vm.editRoom.roomNo;
           var roomPrice = vm.editRoom.roomPrice;
@@ -71,14 +65,14 @@ function roomListCtrl ($scope,$cookieStore,RoomType,RoomState){
           var roomType = vm.editRoom.roomType;
           var roomState = vm.editRoom.roomState;
           var roomDescription = vm.editRoom.roomDescription;
-          query.set('roomNo', roomNo);
-          query.set('roomPrice', roomPrice);
-          query.set('roomFloor', roomFloor);
-          query.set('roomArea', roomArea);
-          query.set('roomType', roomType);
-          query.set('roomState', roomState);
-          query.set('roomDescription', roomDescription);
-          query.save(null, {
+          obj.set('roomNo', roomNo);
+          obj.set('roomPrice', roomPrice);
+          obj.set('roomFloor', roomFloor);
+          obj.set('roomArea', roomArea);
+          obj.set('roomType', roomType);
+          obj.set('roomState', roomState);
+          obj.set('roomDescription', roomDescription);
+          obj.save(null, {
             success: function(object) {
               window.location.reload();
             },
